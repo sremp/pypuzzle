@@ -1,20 +1,27 @@
+# Need to run in interactive mode due to inability to handle ansi escape characters
 from pynput import keyboard
 
-def on_press(key):
+
+# class DialInterface:
+
+def on_press(key_input):
     try:
-        print('alphanumeric key {0} pressed'.format(
-            key.char))
+        if key_input == keyboard.Key.up:
+            print("uppies")
+        elif key_input == keyboard.Key.down:
+            print("downies")
+        elif key_input == keyboard.Key.left:
+            print("lefties")       
     except AttributeError:
         print('special key {0} pressed'.format(
-            key))
+            key_input))
 
-def on_release(key):
-    print('{0} released'.format(
-        key))
-    if key == keyboard.Key.esc:
+def on_release(key_input):
+    if key_input == keyboard.Key.esc:
         # Stop listener
         return False
 
+# Need to suppress python interpreter history when thread is running in the interpreter
 def input_handler():
     # Collect events until released
     with keyboard.Listener(
@@ -22,8 +29,14 @@ def input_handler():
         on_release=on_release) as listener:
         listener.join()
 
-    # ...or, in a non-blocking fashion:
-    listener = keyboard.Listener(
-        on_press=on_press,
-        on_release=on_release)
-    listener.start()
+# Use for GUI integrations or other stuff that requires current thread to continue
+# listener = keyboard.Listener(
+#     on_press=on_press,
+#     on_release=on_release)
+# listener.start()
+
+
+
+input_handler()
+# Using input method after input_handler function results in the second key-press successfully ignoring ansi in non-interactive mode. Something to do with Threading here?
+# input()
