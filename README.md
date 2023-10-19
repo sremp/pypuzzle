@@ -13,10 +13,23 @@ Currently, only dial-based lock "puzzles" are demonstrated.
 
 ## How to play
 
+### Running the sample
+
+First, pull down by cloning the repo and installing requirements:
 ```
+cd pypuzzle
 pip install requirements
-python puzzle_dial.py
 ```
+
+Then run the sample:
+
+```
+python main.py
+```
+
+### Operating the dial
+
+Use left and right arrow keys to move the cursor between the dials of the lock. Use up and down arrow keys to scroll through the letters of the dial. Press enter to attempt to open the lock. Press Q to go back to the main menu.
 
 ## Known Issues & TODOs
 
